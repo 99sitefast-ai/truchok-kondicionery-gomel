@@ -521,8 +521,13 @@ button{font:inherit}
   .ftr-in{grid-template-columns:1fr 1fr;gap:26px}
   .shead{flex-direction:column;align-items:flex-start;gap:12px}
 }
+@media (max-width:700px){
+  .hdr-tel{display:none}
+}
 @media (max-width:620px){
   body{font-size:16px}
+  .logo-txt{font-size:17px}
+  .logo-txt small{font-size:8px;letter-spacing:.1em}
   .sec{padding:44px 0}
   .sym,.why,.steps,.cards2,.cards3{grid-template-columns:1fr}
   .hero-trust{grid-template-columns:repeat(2,1fr);gap:14px 18px}
