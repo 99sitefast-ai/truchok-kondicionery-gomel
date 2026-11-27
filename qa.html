@@ -1,15 +1,25 @@
-<!doctype html><html><head><meta charset="utf-8"><style>body{font:14px monospace;margin:0}iframe{width:100%;height:1200px;border:0}</style></head>
-<body><pre id="out">wait</pre><iframe id="f" src="index.html?q=1"></iframe>
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{font:12px monospace;margin:0;background:#222;color:#0f0}
+.row{display:flex;gap:10px;align-items:flex-start;padding:10px}
+iframe{border:1px solid #555;background:#fff}
+pre{margin:0;padding:6px}
+</style></head><body>
+<pre id="out">wait</pre>
+<div class="row">
+  <div><div style="color:#fff">390</div><iframe id="f1" src="index.html?m=1" style="width:390px;height:1500px"></iframe></div>
+  <div><div style="color:#fff">768</div><iframe id="f2" src="index.html?t=1" style="width:768px;height:1500px"></iframe></div>
+</div>
 <script>
-var f=document.getElementById('f');
-f.addEventListener('load',function(){
-  setTimeout(function(){
-    var d=f.contentDocument,w=f.contentWindow,vw=d.documentElement.clientWidth;
-    var out=[];
-    d.querySelectorAll('body *').forEach(function(el){var r=el.getBoundingClientRect();if(r.width>0&&r.right>vw+1){out.push((el.className||el.tagName)+':'+Math.round(r.right));}});
-    var hero=d.querySelector('.hero').getBoundingClientRect();
-    var ruler=d.querySelector('.ruler').getBoundingClientRect();
-    document.getElementById('out').textContent='QA'+JSON.stringify({vw:vw,scrollW:d.documentElement.scrollWidth,heroBottom:Math.round(hero.bottom),rulerBottom:Math.round(ruler.bottom),off:out.slice(0,10)});
-  },600);
+function measure(id,label){
+  var f=document.getElementById(id),d=f.contentDocument,w=f.contentWindow,vw=d.documentElement.clientWidth,out=[];
+  d.querySelectorAll('body *').forEach(function(el){var r=el.getBoundingClientRect();if(r.width>0&&r.right>vw+1){out.push((el.className||el.tagName)+':'+Math.round(r.right));}});
+  return label+':vw'+vw+' sw'+d.documentElement.scrollWidth+' off'+(out.length?out.slice(0,6).join(','):'none');
+}
+var done=0;
+['f1','f2'].forEach(function(id){
+  var f=document.getElementById(id);
+  f.addEventListener('load',function(){setTimeout(function(){
+    document.getElementById('out').textContent+= '\n'+measure(id,id==='f1'?'390':'768');
+  },700);});
 });
 </script></body></html>
