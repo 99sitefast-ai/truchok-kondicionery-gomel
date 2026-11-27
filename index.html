@@ -399,5 +399,6 @@
 </div>
 
 <script src="assets/js/app.js" defer></script>
+<script>window.addEventListener('load',function(){var d=document.documentElement;var hero=document.querySelector('.hero');var ruler=document.querySelector('.ruler');var h={vw:window.innerWidth,vh:window.innerHeight,scrollW:d.scrollWidth,heroBottom:Math.round(hero.getBoundingClientRect().bottom),rulerBottom:Math.round(ruler.getBoundingClientRect().bottom)};var p=document.createElement('pre');p.id='qa';p.textContent='QA'+JSON.stringify(h);document.body.appendChild(p);});</script>
 </body>
 </html>
