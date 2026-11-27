@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{font:14px monospace;margin:0}iframe{width:100%;height:1200px;border:0}</style></head>
+<body><pre id="out">wait</pre><iframe id="f" src="index.html?q=1"></iframe>
+<script>
+var f=document.getElementById('f');
+f.addEventListener('load',function(){
+  setTimeout(function(){
+    var d=f.contentDocument,w=f.contentWindow,vw=d.documentElement.clientWidth;
+    var out=[];
+    d.querySelectorAll('body *').forEach(function(el){var r=el.getBoundingClientRect();if(r.width>0&&r.right>vw+1){out.push((el.className||el.tagName)+':'+Math.round(r.right));}});
+    var hero=d.querySelector('.hero').getBoundingClientRect();
+    var ruler=d.querySelector('.ruler').getBoundingClientRect();
+    document.getElementById('out').textContent='QA'+JSON.stringify({vw:vw,scrollW:d.documentElement.scrollWidth,heroBottom:Math.round(hero.bottom),rulerBottom:Math.round(ruler.bottom),off:out.slice(0,10)});
+  },600);
+});
+</script></body></html>
